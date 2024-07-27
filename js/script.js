@@ -180,6 +180,10 @@ function emptyFields() {
   });
 }
 
+function formatResult(number) {
+  return number.toLocaleString("en-US");
+}
+
 document.querySelector(".clear-form").addEventListener("click", () => {
   displayResults.style.display = "block";
   /**************** MORTGAGE AMOUNT ******************/
@@ -224,30 +228,36 @@ calculateButton.addEventListener("click", (e) => {
     let interestRateValue = Math.abs(interestRate.value);
 
     if (document.getElementById("repayment").checked) {
-      monthlyRepaymentValue.innerHTML = `£${monthlyPayment(
-        mortgageAmountValue,
-        interestRateValue,
-        mortgageTermValue
-      ).toFixed(2)}`;
-      totalRepaymentValue.innerHTML = `£${totalRepayment(
-        mortgageAmountValue,
-        interestRateValue,
-        mortgageTermValue
-      ).toFixed(2)}`;
+      monthlyRepaymentValue.innerHTML = `£${formatResult(
+        monthlyPayment(
+          mortgageAmountValue,
+          interestRateValue,
+          mortgageTermValue
+        )
+      )}`;
+      totalRepaymentValue.innerHTML = `£${formatResult(
+        totalRepayment(
+          mortgageAmountValue,
+          interestRateValue,
+          mortgageTermValue
+        )
+      )}`;
       displayResults.style.display = "none";
       displayedResults.classList.add("display");
     } else if (document.getElementById("interest-only").checked) {
-      monthlyRepaymentValue.innerHTML = `£${monthlyInterestPayment(
-        mortgageAmountValue,
-        mortgageTermValue
-      ).toFixed(2)}`;
-      totalRepaymentValue.innerHTML = `£${interestPaidOverTerm(
-        mortgageAmountValue,
-        mortgageTermValue,
-        interestRateValue
-      ).toFixed(2)}`;
+      monthlyRepaymentValue.innerHTML = `£${formatResult(
+        monthlyInterestPayment(mortgageAmountValue, mortgageTermValue)
+      )}`;
+      totalRepaymentValue.innerHTML = `£${formatResult(
+        interestPaidOverTerm(
+          mortgageAmountValue,
+          mortgageTermValue,
+          interestRateValue
+        )
+      )}`;
       displayResults.style.display = "none";
       displayedResults.classList.add("display");
     }
+    displayedResults.scrollIntoView({ behavior: "smooth" });
   }
 });
