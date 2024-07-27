@@ -187,18 +187,22 @@ document.querySelector(".clear-form").addEventListener("click", () => {
   document.querySelector(".input-prefix").classList.remove("error-bg");
   errorMessage[0].classList.remove("display-error");
   mortgageAmount.classList.remove("error-border");
+
   /****************** MORTGAGE TERM *************/
   document.querySelector(".input-suffix").classList.remove("error-bg");
   errorMessage[1].classList.remove("display-error");
   mortgageTerm.classList.remove("error-border");
+
   /***************** INTEREST RATE ***************/
   document.querySelector(".two").classList.remove("error-bg");
   errorMessage[2].classList.remove("display-error");
   interestRate.classList.remove("error-border");
 
   /******************* RESET BORDERS **************/
+  const inputFields = document.querySelectorAll("input[type='number']");
   inputFields.forEach((inputField) => {
     inputField.classList.remove("error-border");
+    inputField.style.borderColor = black;
     inputFields.forEach((inputField) => () => {
       inputField.addEventListener("blur", () => {
         inputField.style.borderColor = lime;
@@ -244,8 +248,6 @@ calculateButton.addEventListener("click", (e) => {
       ).toFixed(2)}`;
       displayResults.style.display = "none";
       displayedResults.classList.add("display");
-
-      displayedResults.scrollIntoView({ behavior: "smooth" });
     }
   }
 });

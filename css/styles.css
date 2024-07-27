@@ -29,6 +29,7 @@ body {
   background-color: var(--slate-100);
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
 }
 
 /************** MORTGAGE FORM ******************/
@@ -95,7 +96,6 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: var(--slate-100);
   font-weight: 700;
   padding: 0.62rem 1.3rem 0.88rem 1.3rem;
-  /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%) */
   font-size: 1.1rem;
   border-radius: 8px 0 0 8px;
 }
@@ -399,6 +399,7 @@ button:hover {
 }
 
 .attribution {
+  margin-top: 1rem;
   font-size: 11px;
   text-align: center;
 }
