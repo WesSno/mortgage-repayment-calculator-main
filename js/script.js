@@ -13,6 +13,7 @@ const rootStyles = getComputedStyle(document.documentElement);
 const red = rootStyles.getPropertyValue("--red").trim();
 const lime = rootStyles.getPropertyValue("--lime").trim();
 const black = rootStyles.getPropertyValue("--slate-900").trim();
+const opaqueLime = rootStyles.getPropertyValue("--opaque-lime");
 
 const numberOfPaymentsPerYear = 12;
 
@@ -181,7 +182,7 @@ function emptyFields() {
 }
 
 function formatResult(number) {
-  return number.toLocaleString("en-US");
+  return number.toLocaleString("en-US", { style: "currency", currency: "GBP" });
 }
 
 document.querySelector(".clear-form").addEventListener("click", () => {
@@ -228,14 +229,14 @@ calculateButton.addEventListener("click", (e) => {
     let interestRateValue = Math.abs(interestRate.value);
 
     if (document.getElementById("repayment").checked) {
-      monthlyRepaymentValue.innerHTML = `£${formatResult(
+      monthlyRepaymentValue.innerHTML = `${formatResult(
         monthlyPayment(
           mortgageAmountValue,
           interestRateValue,
           mortgageTermValue
         )
       )}`;
-      totalRepaymentValue.innerHTML = `£${formatResult(
+      totalRepaymentValue.innerHTML = `${formatResult(
         totalRepayment(
           mortgageAmountValue,
           interestRateValue,
@@ -245,10 +246,10 @@ calculateButton.addEventListener("click", (e) => {
       displayResults.style.display = "none";
       displayedResults.classList.add("display");
     } else if (document.getElementById("interest-only").checked) {
-      monthlyRepaymentValue.innerHTML = `£${formatResult(
+      monthlyRepaymentValue.innerHTML = `${formatResult(
         monthlyInterestPayment(mortgageAmountValue, mortgageTermValue)
       )}`;
-      totalRepaymentValue.innerHTML = `£${formatResult(
+      totalRepaymentValue.innerHTML = `${formatResult(
         interestPaidOverTerm(
           mortgageAmountValue,
           mortgageTermValue,
@@ -260,4 +261,13 @@ calculateButton.addEventListener("click", (e) => {
     }
     displayedResults.scrollIntoView({ behavior: "smooth" });
   }
+});
+
+calculateButton.addEventListener("touchend", () => {
+  const button = document.getElementById("repayment-button");
+
+  button.style.backgroundColor = opaqueLime;
+  setTimeout(() => {
+    button.style.backgroundColor = lime;
+  }, 200);
 });
