@@ -1,0 +1,408 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /************** PRIMARY ************/
+  --lime: hsl(61, 70%, 52%);
+  --opaque-lime: hsl(61, 59%, 68%);
+  --red: hsl(4, 69%, 50%);
+  --very-light-red: hsl(0, 100%, 98%);
+
+  /************** Neutral ****************/
+  -white: hsl(210, 8%, 95%);
+  --slate-70: hsla(202, 87%, 94%, 0.219);
+  --slate-100: hsl(202, 86%, 94%);
+  --slate-300: hsl(203, 41%, 72%);
+  --slate-500: hsl(200, 26%, 54%);
+  --slate-700: hsl(200, 24%, 40%);
+  --slate-900: hsl(202, 55%, 16%);
+  --slate-1100: hsl(201, 63%, 12%);
+}
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: var(--slate-100);
+  min-height: 100vh;
+  display: flex;
+}
+
+/************** MORTGAGE FORM ******************/
+.mortgage-form-card {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 1rem 2rem 1rem;
+}
+
+.title .name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin-bottom: 0.7rem;
+}
+
+.title .clear-form {
+  color: var(--slate-700);
+}
+
+label {
+  color: var(--slate-700);
+}
+
+/************** MORTGAGE INPUTS ****************/
+
+input[type="number"] {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: var(--slate-900);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.5rem 0 2rem 0;
+  padding: 0.75rem 4rem;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--slate-900);
+  outline: none;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.mortgage-cost,
+.mortgage-term-box,
+.interest-rate-box {
+  position: relative;
+}
+
+.input-prefix,
+.input-suffix {
+  margin: 0 auto;
+  position: absolute;
+  top: 48.4%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevents the prefix/suffix from being focusable */
+  color: var(--slate-700);
+  background-color: var(--slate-100);
+  font-weight: 700;
+  padding: 0.62rem 1.3rem 0.88rem 1.3rem;
+  /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%) */
+  font-size: 1.1rem;
+  border-radius: 8px 0 0 8px;
+}
+
+.input-prefix {
+  left: 0.5px;
+}
+
+#years {
+  top: 48.38%;
+}
+
+.input-suffix {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  top: 48.45%;
+  right: 1px;
+  border-radius: 0 8px 8px 0;
+}
+
+#mortgage-term,
+#interest-rate {
+  padding: 0.75rem 7rem 0.75rem 1rem;
+}
+
+#mortgage-amount:focus,
+#mortgage-term:focus,
+#interest-rate:focus {
+  border-color: var(--lime);
+}
+
+#mortgage-amount:focus + .input-prefix,
+#mortgage-term:focus + .input-suffix,
+#interest-rate:focus + .input-suffix {
+  background-color: var(--lime);
+}
+
+/************ MORTGAGE TYPE SECTION *************/
+.mortgage-type {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+
+.repayment-button,
+.interest-only-button {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  border: 1px solid var(--slate-900);
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+}
+
+.repayment-button input,
+.interest-only-button input {
+  width: 18px;
+  height: 18px;
+}
+
+.repayment-button label,
+.interest-only-button label {
+  color: var(--slate-900);
+  font-weight: 500;
+}
+
+/* Apply lime border to div when the input inside is focused */
+.repayment-button:focus-within,
+.interest-only-button:focus-within {
+  border-color: var(--lime);
+  background-color: var(--very-light-red);
+}
+
+/* Styling the radio button when it's focused */
+input[type="radio"]:focus {
+  outline: var(--lime);
+}
+
+/* Styling the radio button when it's checked */
+input[type="radio"]:checked {
+  background-color: var(--lime);
+  border-color: var(--lime);
+}
+
+/* Hide the actual radio button */
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Custom styling for the radio buttons */
+.repayment-button span::before,
+.interest-only-button span::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 0.5rem;
+  border: 1px solid var(--slate-700);
+  border-radius: 50%;
+  background-color: white;
+  vertical-align: bottom;
+}
+
+input[type="radio"]:checked + span::before {
+  background-color: var(--lime);
+  border-color: var(--lime);
+}
+
+/************** ERROR MESSAGE ***************/
+input.focus {
+  outline: var(--lime);
+}
+
+.error-message {
+  display: none;
+  color: var(--red);
+  font-size: 12px;
+  position: absolute;
+  top: 75%;
+  left: 5%;
+}
+
+.error-message.display-error {
+  display: block;
+}
+
+.input-prefix.error-bg,
+.input-suffix.error-bg,
+.two.error-bg {
+  background-color: var(--red);
+}
+
+.mortgage-type .error-message {
+  top: 103%;
+}
+
+#mortgage-amount.error-border,
+#mortgage-term.error-border,
+#interest-rate.error-border {
+  border: 1px solid var(--red);
+}
+
+/************ BUTTON **************/
+button {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  background-color: var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  border-radius: 50px;
+  border: none;
+  padding: 0.7rem 0;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--opaque-lime);
+}
+
+/*************** RESULTS SECTION **************/
+.results-filled.display {
+  display: block;
+}
+
+.results {
+  padding: 2rem 2rem;
+  background-color: var(--slate-900);
+}
+
+.results-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.results-empty h2,
+.results-filled h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.results-empty p,
+.results-filled p {
+  color: var(--slate-300);
+  line-height: 1.5rem;
+}
+
+.results-filled {
+  display: flex;
+  display: none;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+.results-filled h2 {
+  margin-bottom: 1rem;
+}
+
+.results-filled p {
+  margin-bottom: 1rem;
+}
+
+.final-results-card {
+  background-color: var(--slate-1100);
+  border-top: 4px solid var(--lime);
+  border-radius: 10px;
+  padding: 2.5rem 1.5rem;
+}
+
+.monthly-repayments-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 1px solid var(--slate-70);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.monthly-repayments-results h3 {
+  font-size: 2.5rem;
+  color: var(--lime);
+}
+
+.total-repayments {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.total-repayments h3 {
+  color: white;
+}
+
+@media only screen and (min-width: 700px) {
+  body {
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  main {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  /**************** MORTGAGE FORM ****************/
+  .mortgage-form-card {
+    padding: 2.5rem 2.5rem;
+  }
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .term-and-rate {
+    display: flex;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .mortgage-term-box,
+  .interest-rate-box {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  main {
+    background-color: white;
+    display: flex;
+    max-width: 1100px;
+  }
+
+  .results {
+    padding: 2.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 80px;
+  }
+
+  button {
+    width: 70%;
+  }
+
+  .final-results-card,
+  .results-filled p {
+    max-width: 750px;
+  }
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
