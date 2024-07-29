@@ -113,7 +113,7 @@ input[type="number"]::-webkit-inner-spin-button {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   top: 48.45%;
-  right: 0.6px;
+  right: 1.6px;
   border-radius: 0 8px 8px 0;
 }
 
@@ -271,6 +271,7 @@ button:hover {
 }
 
 .results {
+  width: 100%;
   padding: 2rem 2rem;
   background-color: var(--slate-900);
 }
